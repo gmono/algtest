@@ -14,4 +14,33 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="t_1004.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="t_1022.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="t_1234.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="t_1242.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="t_1242_error.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="t_1242_error2.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.txt" />
+    <Text Include="t_1242.txt" />
+  </ItemGroup>
 </Project>
