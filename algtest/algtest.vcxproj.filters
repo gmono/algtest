@@ -38,6 +38,15 @@
     <ClInclude Include="t_1242_error2.hh">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="heap.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTimer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />
