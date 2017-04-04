@@ -10,11 +10,7 @@ public:
 
 	MyTimer()
 	{
-		init();
-	}
-	inline void init()
-	{
-		QueryPerformanceFrequency(&_freq);
+        QueryPerformanceFrequency(&_freq);
 	}
 
 	inline void start()
@@ -27,10 +23,10 @@ public:
 		QueryPerformanceCounter(&_stop);
 	}
 
-	inline double elapse()
-	{
-		return 1e3*(_stop.QuadPart - _start.QuadPart) / _freq.QuadPart;
-	}
+//	inline double elapse()
+//	{
+//		return 1e3*(_stop.QuadPart - _start.QuadPart) / _freq.QuadPart;
+//	}
 
 	inline long long ticks()
 	{

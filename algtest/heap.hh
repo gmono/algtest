@@ -104,9 +104,9 @@ void quick(int *p, int count)
 }
 int main()
 {
-	AutoTest<int>(&quick, 0, 1000000, 10001, 10, 100000);
-	AutoTest<int>(&test, 0, 1000000, 10001, 10, 100000);
-	AutoTest<int>(&testinsert, 0, 1000000,10001,10,100000);
+    AutoTest<int>(&quick, 0, 1000000, 1001, 10, 100000);
+    AutoTest<int>(&test, 0, 1000000, 1001, 10, 100000);
+    AutoTest<int>(&testinsert, 0, 1000000,1001,10,100000);
 	return 0;
 }
 #include <stdio.h>

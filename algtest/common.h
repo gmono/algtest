@@ -2,8 +2,9 @@
 //公用测试库
 //随机数生成器
 #include <random>
-#include "MyTimer.h"
-
+//#include "MyTimer_win.h"
+#include "MyTimer_linux.h"
+#include <time.h>
 template<typename ValType>
 bool DefaultJfun(ValType v)
 {
@@ -58,6 +59,8 @@ template<typename T>
 void DefaultOut(T *data, int count)
 {
 }
+
+#include <iostream>
 //默认测试100次 每次生成1000个数字的随机数池进行测试 每次传递一个数字
 //测试函数范式 void fun(valtype *data,int numcount)
 template<typename ValType,typename FunType>
@@ -73,15 +76,14 @@ void AutoTest(FunType fun,int start,int end, int usecount = 1,  int testcount = 
 		long double pltime = 0;
 
 		for (int j=1;j<=tcount;j++)
-		{
-			timer.init();
+        {
 			auto tp = pool + nowptr;
 			timer.start();
 			fun(tp, usecount); //这里避免计算
 			timer.stop();
 			//输出临时值
 			outfun(tp, usecount);
-			double testtime = timer.elapse();
+            long long testtime = timer.ticks();
 			pltime = (pltime*(j - 1) + testtime) / j;
 			nowptr += usecount;
 			
@@ -90,5 +92,6 @@ void AutoTest(FunType fun,int start,int end, int usecount = 1,  int testcount = 
 		nowtime = (nowtime*(i - 1) + pltime) / i;
 		delete[] pool;
 	}
-	printf("\n测试%d次,每次循环%d次,每次处理%d个值,平均每次用时%llf\n", testcount, tcount,usecount,nowtime);
+    printf("\nTest %d times of call %d times,use %d value once,average time is: ", testcount, tcount,usecount);
+    std::cout<<nowtime<<std::endl;
 }
