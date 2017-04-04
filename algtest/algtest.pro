@@ -12,7 +12,9 @@ HEADERS += \
     t_1242_error.hh \
     t_1242_error2.hh \
     MyTimer_win.h \
-    MyTimer_linux.h
+    MyTimer_linux.h \
+    dp1.h \
+    dp2.h
 
 SOURCES += \
     main.cpp
