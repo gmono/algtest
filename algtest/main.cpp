@@ -1,1 +1,2 @@
-#include "lanqiao10.hh"
+//#include "lanqiao10.hh"
+#include "imagezip.h"
