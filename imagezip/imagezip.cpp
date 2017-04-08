@@ -3,8 +3,8 @@
 
 #include "stdafx.h"
 
-#pragma comment(lib,"opencv_world320.lib")
-#pragma comment(lib,"7zcproj.lib")
+#pragma comment(lib,"opencv_world320d.lib")
+//#pragma comment(lib,"7zcproj.lib")
 using namespace cv;
 
 #define calwsize(bsize,type) (bsize/sizeof(type)+(bsize%sizeof(type)!=0 ? 1:0))
@@ -45,7 +45,8 @@ void stopfun(int state, void *userdata)
 }
 int main()
 {
-	VideoCapture capture("E:\\Video\\1A-布局-上\\1A-01-01-03-课程大纲和简介.mp4");
+	
+	VideoCapture capture("E:/Video/1A-布局-上/1A-01-01-03-课程大纲和简介.mp4");
 	if (!capture.isOpened()) return 1;
 	double rate = capture.get(CV_CAP_PROP_FPS);
 	Mat frame;
@@ -53,9 +54,13 @@ int main()
 	namedWindow("myvideo", WINDOW_NORMAL);
 	namedWindow("myvideo2", WINDOW_NORMAL);
 	namedWindow("huanyuan", WINDOW_NORMAL);
-	int delay = 1000 / rate/2;
+	//int delay = 1000 / rate/2;
+	int delay = 1000 / rate;
 	capture.set(CV_CAP_PROP_POS_FRAMES, 100);
 	bool isone = true;
+	int i = 1;
+	char *buf = new char[4096];
+	buf[1] = '.'; buf[2] = 'p'; buf[3] = 'n'; buf[4] = 'g'; buf[5] = '\0';
 	while (!stop)
 	{
 
@@ -64,6 +69,8 @@ int main()
 		if (isone)
 		{
 			frame.copyTo(old);
+			buf[0] = i + '0';
+			imwrite(buf, frame);
 			isone = false;
 		}
 		imshow("myvideo", frame);
@@ -71,7 +78,7 @@ int main()
 		Mat hy(frame.rows, frame.cols, CV_8UC3);
 		if (frame.data&&old.data)
 		{
-			g_imagezip<uchar>(frame,old,res);
+			imagezip(frame,old,res);
 			imshow("myvideo2", res);
 		}
 		
@@ -81,12 +88,15 @@ int main()
 		{
 			imagezip(old,res,hy);
 			imshow("huanyuan", hy);
+
 			if (!isone)
 			{
+				buf[0] = i + '0';
+				imwrite(buf, res);
 				hy.copyTo(old);
 			}
 		}
-
+		i++;
 		waitKey(delay);
 	}
 	
