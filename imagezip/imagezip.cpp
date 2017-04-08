@@ -4,6 +4,7 @@
 #include "stdafx.h"
 
 #pragma comment(lib,"opencv_world320.lib")
+#pragma comment(lib,"7zcproj.lib")
 using namespace cv;
 
 #define calwsize(bsize,type) (bsize/sizeof(type)+(bsize%sizeof(type)!=0 ? 1:0))
@@ -34,7 +35,7 @@ void g_imagezip(Mat &buf1,Mat &buf2,Mat &result)
 #pragma omp parallel for
 	for (i = 0; i<bufsize; i += sizeof(T))
 	{
-		*(T *)(res + i) = *(T *)(b1 + i) ^ *(T *)(b2 + i);
+		*(T *)(res+i)=(*(T *)(res + i) = *(T *)(b1 + i) ^ *(T *)(b2 + i))<0? 0:*(T *)(res+i) ;
 	}
 }
 bool stop = false;
@@ -54,17 +55,23 @@ int main()
 	namedWindow("huanyuan", WINDOW_NORMAL);
 	int delay = 1000 / rate/2;
 	capture.set(CV_CAP_PROP_POS_FRAMES, 100);
+	bool isone = true;
 	while (!stop)
 	{
-		frame.copyTo(old);
+
 		if (!capture.read(frame))
 			break;
+		if (isone)
+		{
+			frame.copyTo(old);
+			isone = false;
+		}
 		imshow("myvideo", frame);
 		Mat res(frame.rows, frame.cols, CV_8UC3);
 		Mat hy(frame.rows, frame.cols, CV_8UC3);
 		if (frame.data&&old.data)
 		{
-			imagezip(frame,old,res);
+			g_imagezip<uchar>(frame,old,res);
 			imshow("myvideo2", res);
 		}
 		
@@ -74,11 +81,15 @@ int main()
 		{
 			imagezip(old,res,hy);
 			imshow("huanyuan", hy);
+			if (!isone)
+			{
+				hy.copyTo(old);
+			}
 		}
 
 		waitKey(delay);
 	}
-
+	
 	capture.release();
 	return 0;
 }
