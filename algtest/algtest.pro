@@ -14,7 +14,8 @@ HEADERS += \
     MyTimer_win.h \
     MyTimer_linux.h \
     dp1.h \
-    dp2.h
+    dp2.h \
+    bignum.hh
 
 SOURCES += \
     main.cpp
