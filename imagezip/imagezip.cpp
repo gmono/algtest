@@ -103,4 +103,3 @@ int main()
 	capture.release();
 	return 0;
 }
-
