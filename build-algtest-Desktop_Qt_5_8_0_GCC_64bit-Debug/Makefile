@@ -232,7 +232,8 @@ DIST          = ../algtest/t_1242.txt \
 		../algtest/MyTimer_win.h \
 		../algtest/MyTimer_linux.h \
 		../algtest/dp1.h \
-		../algtest/dp2.h ../algtest/main.cpp
+		../algtest/dp2.h \
+		../algtest/bignum.hh ../algtest/main.cpp
 QMAKE_TARGET  = algtest
 DESTDIR       = 
 TARGET        = algtest
@@ -604,7 +605,7 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.8.0/5.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../algtest/common.h ../algtest/heap.hh ../algtest/t_1004.hh ../algtest/t_1022.hh ../algtest/t_1234.hh ../algtest/t_1242.hh ../algtest/t_1242_error.hh ../algtest/t_1242_error2.hh ../algtest/MyTimer_win.h ../algtest/MyTimer_linux.h ../algtest/dp1.h ../algtest/dp2.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../algtest/common.h ../algtest/heap.hh ../algtest/t_1004.hh ../algtest/t_1022.hh ../algtest/t_1234.hh ../algtest/t_1242.hh ../algtest/t_1242_error.hh ../algtest/t_1242_error2.hh ../algtest/MyTimer_win.h ../algtest/MyTimer_linux.h ../algtest/dp1.h ../algtest/dp2.h ../algtest/bignum.hh $(DISTDIR)/
 	$(COPY_FILE) --parents ../algtest/main.cpp $(DISTDIR)/
 
 
@@ -651,7 +652,7 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-main.o: ../algtest/main.cpp ../algtest/dp2.h
+main.o: ../algtest/main.cpp ../algtest/bignum.hh
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../algtest/main.cpp
 
 ####### Install

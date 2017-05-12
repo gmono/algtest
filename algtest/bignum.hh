@@ -12,7 +12,7 @@ public:
 
     BigNum(basetype num)
     {
-
+        this->data.push_back(num);
     }
     BigNum(const string &str)
     {
@@ -46,13 +46,44 @@ public:
 
     BigNum operator +(const BigNum &num)
     {
-
+        BigNum ret=*this;
+        ret+=num;
+        return ret;
     }
+
+    //translation
+
+    string toString(int base)
+    {
+        string ret;
+        for(auto itr=data.rbegin();itr!=data.rend();++itr)
+        {
+            vector<char> temp;
+            for(basetype i=*itr;i>0;i/=base)
+            {
+                int tnum=i%base;
+                char tc=tnum>9? 'A'+tnum-10:'0'+tnum;
+                temp.push_back(tc);
+            }
+            for(auto titr=temp.rbegin();titr!=temp.rend();++titr)
+            {
+                ret.push_back(*titr);
+            }
+        }
+        return ret;
+    }
+
 protected:
     vector<basetype> data;
 };
 
 int main()
 {
-
+    unsigned long long tn=~((long long)0);
+    BigNum num=0;
+    for(int i=0;i<100;++i)
+    {
+        num+=tn;
+    }
+    cout<<num.toString(16);
 }
