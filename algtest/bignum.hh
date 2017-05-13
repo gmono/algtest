@@ -110,7 +110,7 @@ public:
         while (i>=0)
         {
             basetype t1=base<0? 0:this->data[base]<<s;
-            basetype t2=base-1<0? 0:this->data[base-1]<<(m-s);
+            basetype t2=base-1<0? 0:this->data[base-1]>>(m-s);
             this->data[i]=t1|t2;
             i--;
             base--;
@@ -151,6 +151,6 @@ int main()
     {
         num+=tn;
     }
-    num<<10;
+    num<<=1;
     cout<<num.toString(16);
 }

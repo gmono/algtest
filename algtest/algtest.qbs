@@ -1,5 +1,4 @@
 import qbs
-
 CppApplication {
     consoleApplication: true
     files: [
@@ -20,7 +19,7 @@ CppApplication {
         "t_1242_error.hh",
         "t_1242_error2.hh",
     ]
-
+    cpp.cxxLanguageVersion: "c++11"
     Group {     // Properties for the produced executable
         fileTagsFilter: product.type
         qbs.install: true
