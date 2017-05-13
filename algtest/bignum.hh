@@ -139,9 +139,9 @@ int main()
 {
     unsigned long long tn=~((long long)0);
     BigNum num=0;
-    for(int i=0;i<10000000;++i)
+    for(int i=0;i<1;++i)
     {
         num+=tn;
     }
-    cout<<num.toString(16);
+    cout<<num.toString(10);
 }
