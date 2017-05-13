@@ -101,11 +101,19 @@ public:
     //位运算
     void operator <<=(const basetype n)
     {
-        basetype t=n%sizeof(basetype);
-        basetype s=n/sizeof(basetype);
-        for(int i=data.size()-1,base=data.size()-1-s;base>=0;)
+        constexpr int m=sizeof(basetype);
+        int l=n/(m+1);
+        int s=n%(m+1);
+        int base=this->data.size();
+        int i=base+l;
+        if(i>=this->data.size()) this->data.resize(i+1);
+        while (i>=0)
         {
-
+            basetype t1=base<0? 0:this->data[base]<<s;
+            basetype t2=base-1<0? 0:this->data[base-1]<<(m-s);
+            this->data[i]=t1|t2;
+            i--;
+            base--;
         }
     }
 
@@ -143,5 +151,6 @@ int main()
     {
         num+=tn;
     }
-    cout<<num.toString(10);
+    num<<10;
+    cout<<num.toString(16);
 }
