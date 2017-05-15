@@ -1,14 +1,87 @@
 #include <iostream>
 #include <vector>
 #include <string>
-
+#include "MyTimer_win.h"
 using namespace std;
+typedef unsigned long long basetype;
+constexpr basetype MaxDec=10000000000000000000;
+/**
+ * @brief 打印用大数
+ * 内部以10的乘方进制保存数字
+ */
+class PrintNum
+{
+public:
+
+    PrintNum(const vector<basetype> &num)
+    {
+        basetype cf=0;
+        for(auto itr=num.begin();itr!=num.end();++itr)
+        {
+            basetype t=*itr;
+            basetype tcf=cf;
+            if(t>=MaxDec)
+            {
+                //怕溢出 先进位再加上
+                t-=MaxDec;
+                cf=1;
+                t+=tcf;
+                this->pnum.push_back(t);
+            }
+            else
+            {
+                //上面没有执行即 原数小于MaxDEC
+                t+=tcf;
+                //上面和这里只能同时执行一个
+                if(t>=MaxDec)
+                {
+                    t-=MaxDec;
+                    cf=1;
+                }
+                else
+                {
+                    cf=0;
+                }
+                //放入
+                this->pnum.push_back(t);
+            }
+
+        }
+        if(cf)
+        {
+            this->pnum.push_back(1);
+        }
+    }
+
+    void print()
+    {
+        for(auto itr=this->pnum.rbegin();itr!=this->pnum.rend();++itr)
+        {
+            printf("%llu",*itr);
+        }
+    }
+
+    operator string()
+    {
+        string ret;
+        char buf[50];
+        for(auto itr=this->pnum.rbegin();itr!=this->pnum.rend();++itr)
+        {
+            sprintf(buf,"%llu",*itr);
+            ret+=string(buf);
+        }
+        return ret;
+    }
+
+protected:
+    vector<basetype> pnum;
+};
 
 //low to high
 class BigNum
 {
 public:
-    typedef unsigned long long basetype;
+
 
     BigNum(basetype num)
     {
@@ -101,7 +174,8 @@ public:
     //位运算
     void operator <<=(const basetype n)
     {
-        constexpr int m=sizeof(basetype);
+        if(n==0) return;
+        constexpr int m=sizeof(basetype)*8;
         int l=n/(m+1);
         int s=n%(m+1);
         int base=this->data.size();
@@ -139,6 +213,11 @@ public:
         return ret;
     }
 
+    operator PrintNum()
+    {
+        return PrintNum(this->data);
+    }
+
 protected:
     vector<basetype> data;
 };
@@ -146,11 +225,21 @@ protected:
 int main()
 {
     unsigned long long tn=~((long long)0);
+    MyTimer timer;
     BigNum num=0;
-    for(int i=0;i<1;++i)
+    timer.start();
+    for(int i=0;i<1000;++i)
     {
         num+=tn;
     }
-    num<<=1;
-    cout<<num.toString(16);
+    timer.stop();
+    cout<<"Time is:"<<timer.ticks()<<endl;
+
+//    num<<=10;
+    cout<<tn<<endl;
+    cout<<MaxDec<<endl;
+    cout<<num.toString(10)<<endl;
+    cout<<((string)(PrintNum)num)<<endl;
+    ((PrintNum)num).print();
+
 }
