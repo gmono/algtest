@@ -139,7 +139,7 @@ const char *smul(const char *num,int len,char n,int &nlen,bool isusep)
     static char pool[10][51000]={0};
     static int plens[10]={0};
     static char recn[51000];
-    static char reclen=0;
+    static int reclen=0;
     bool isrecreate=false;
     if(len!=reclen) isrecreate=true;
     else for(int i=0;i<len;++i)

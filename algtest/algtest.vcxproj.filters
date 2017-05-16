@@ -56,6 +56,15 @@
     <ClInclude Include="imagezip.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="1402.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="1402_new.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="1402_test.hh">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="test.txt" />

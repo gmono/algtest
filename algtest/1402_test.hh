@@ -48,9 +48,9 @@ int main()
         int len2=newalg::trans(num2);
         memset(result,0,len1+len2);
         int rlen=newalg::mul(result,num1,len1,num2,len2);
-//        newalg::directPrint(result,rlen);
-        newalg::backTrans(result,rlen);
-        printf("%s",result);
+        newalg::directPrint(result,rlen);
+        //newalg::backTrans(result,rlen);
+        //printf("%s",result);
         putchar('\n');
         ok("newalg's ");
         getchar();
