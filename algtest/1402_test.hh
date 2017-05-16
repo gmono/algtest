@@ -20,7 +20,7 @@ void create(string &str,int maxn)
 #include "1402_new.hh"
 int main()
 {
-    constexpr int testcount=100;
+    constexpr int testcount=10;
     constexpr int maxn=50000;
     char *num1=new char[maxn+1000];
     char *num2=new char[maxn+1000];
@@ -39,20 +39,20 @@ int main()
         oldalg::trans(n1,nc);
         oldalg::trans(n2,nc2);
         vector<uint> res=oldalg::mul(nc,nc2);
-        print(res);
-        putchar('\n');
+//        print(res);
+//        putchar('\n');
         ok("oldalg's ");
-        getchar();
+//        getchar();
         start;
         int len1=newalg::trans(num1);
         int len2=newalg::trans(num2);
         memset(result,0,len1+len2);
         int rlen=newalg::mul(result,num1,len1,num2,len2);
-        newalg::directPrint(result,rlen);
+//        newalg::directPrint(result,rlen);
         //newalg::backTrans(result,rlen);
         //printf("%s",result);
-        putchar('\n');
+//        putchar('\n');
         ok("newalg's ");
-        getchar();
+//        getchar();
     }
 }

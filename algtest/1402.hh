@@ -8,13 +8,14 @@ namespace oldalg {
 typedef unsigned int uint;
 typedef unsigned long long ulong;
 #define MaxDec 100000000
+#define MaxByte 8
 void trans(const string &s,vector<uint> &n)
 {
     int nowstep=0;
     uint buf=0;
     for(auto itr=s.rbegin();itr!=s.rend();++itr)
     {
-        if(nowstep==8)
+        if(nowstep==MaxByte)
         {
             //放入
             n.push_back(buf);
