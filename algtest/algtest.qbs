@@ -2,6 +2,9 @@ import qbs
 CppApplication {
     consoleApplication: true
     files: [
+        "1402.hh",
+        "1402_new.hh",
+        "1402_test.hh",
         "MyTimer_linux.h",
         "MyTimer_win.h",
         "bignum.hh",
