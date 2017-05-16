@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <memory.h>
+namespace newalg {
 /**
  * @brief trans 转换字符串为十进制数列
  * @param str 字符串
@@ -117,7 +118,7 @@ int nmul(char *num,int len,char n)
  * @param isusep 是否使用优化模式（池模式)
  * @return 新序列指针 (不可释放)
  */
-const char *smul(char *num,int len,char n,int &nlen,bool isusep)
+const char *smul(const char *num,int len,char n,int &nlen,bool isusep)
 {
     if(!isusep)
     {
@@ -174,10 +175,10 @@ const char *smul(char *num,int len,char n,int &nlen,bool isusep)
  * @param len2 因子2长度
  * @result 返回序列长度
  */
-int mul(char *result,char *num1,int len1,char *num2,int len2)
+int mul(char *result,const char *num1,int len1,const char *num2,int len2)
 {
 
-    char *base,*num;
+    const char *base,*num;
     int baselen,nlen;
     if(len1<len2)
     {
@@ -207,26 +208,28 @@ int mul(char *result,char *num1,int len1,char *num2,int len2)
         char b=base[i];
         //以b为因子进行数乘结果向高位移i个十进制位后叠加
         int mlen;
-        const char *buf=smul(num,nlen,b,mlen,true);
+        const char *buf=smul(num,nlen,b,mlen,isusep);
         add(result+i,buf,mlen);
     }
     if(result[len1+len2-1]==0) return len1+len2-1;
     return len1+len2;
 }
 
-int main()
-{
-    static char num1[51000];
-    static char num2[51000];
-    static char result[101000];
-    while(scanf("%s %s",num1,num2)!=EOF)
-    {
-        int len1=trans(num1);
-        int len2=trans(num2);
-        memset(result,0,len1+len2);
-        int rlen=mul(result,num1,len1,num2,len2);
-        directPrint(result,rlen);
-        putchar('\n');
-    }
 }
+using namespace newalg;
+//int main()
+//{
+//    static char num1[51000];
+//    static char num2[51000];
+//    static char result[101000];
+//    while(scanf("%s %s",num1,num2)!=EOF)
+//    {
+//        int len1=trans(num1);
+//        int len2=trans(num2);
+//        memset(result,0,len1+len2);
+//        int rlen=mul(result,num1,len1,num2,len2);
+//        directPrint(result,rlen);
+//        putchar('\n');
+//    }
+//}
 

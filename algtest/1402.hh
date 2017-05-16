@@ -4,6 +4,7 @@
 #include <vector>
 #include <math.h>
 using namespace std;
+namespace oldalg {
 typedef unsigned int uint;
 typedef unsigned long long ulong;
 #define MaxDec 100000000
@@ -153,18 +154,20 @@ void print(const vector<uint> &n)
     }
 }
 
-int main()
-{
-    string n1,n2;
-    while(cin>>n1>>n2)
-    {
-        vector<uint> nc;
-        vector<uint> nc2;
-        trans(n1,nc);
-        trans(n2,nc2);
-        vector<uint> res=mul(nc,nc2);
-        print(res);
-        putchar('\n');
-    }
-    return 0;
 }
+using namespace oldalg;
+//int main()
+//{
+//    string n1,n2;
+//    while(cin>>n1>>n2)
+//    {
+//        vector<uint> nc;
+//        vector<uint> nc2;
+//        trans(n1,nc);
+//        trans(n2,nc2);
+//        vector<uint> res=mul(nc,nc2);
+//        print(res);
+//        putchar('\n');
+//    }
+//    return 0;
+//}
