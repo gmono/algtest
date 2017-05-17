@@ -151,7 +151,6 @@ void print(const vector<uint> &n)
             }
             printf("%s",strbuf);
         }
-
     }
 }
 

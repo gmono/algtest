@@ -218,21 +218,21 @@ int mul(char *result,const char *num1,int len1,const char *num2,int len2)
 
 }
 using namespace newalg;
-int main()
-{
-    static char num1[51000];
-    static char num2[51000];
-    static char result[101000];
-    while(scanf("%s %s",num1,num2)!=EOF)
-    {
-        int len1=trans(num1);
-        int len2=trans(num2);
-        memset(result,0,len1+len2);
-        int rlen=mul(result,num1,len1,num2,len2);
-//        directPrint(result,rlen);
-        backTrans(result,rlen);
-        printf("%s",result);
-        putchar('\n');
-    }
-}
+//int main()
+//{
+//    static char num1[51000];
+//    static char num2[51000];
+//    static char result[101000];
+//    while(scanf("%s %s",num1,num2)!=EOF)
+//    {
+//        int len1=trans(num1);
+//        int len2=trans(num2);
+//        memset(result,0,len1+len2);
+//        int rlen=mul(result,num1,len1,num2,len2);
+////        directPrint(result,rlen);
+//        backTrans(result,rlen);
+//        printf("%s",result);
+//        putchar('\n');
+//    }
+//}
 

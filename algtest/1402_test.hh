@@ -18,8 +18,33 @@ void create(string &str,int maxn)
 #include <string.h>
 #include "1402.hh"
 #include "1402_new.hh"
+#include "1402_c.hh"
+#include "1402_w.hh"
+void cmp(vector<uint> &res,uint *buf,int len)
+{
+    //比较1402和1402c 的结果
+    if(len!=res.size())
+    {
+        cout<<"error length"<<endl;
+    }
+    for(int i=0;i<len;++i)
+    {
+        if(buf[i]!=res[i])
+        {
+            printf("error beteen test:%u true:%u at %d\n",buf[i],res[i],i);
+            break;
+        }
+        if(i==len-1)
+        {
+            printf("test is ok\n");
+        }
+    }
+    getchar();
+}
+
 int main()
 {
+    srand(time(0));
     constexpr int testcount=10;
     constexpr int maxn=50000;
     char *num1=new char[maxn+1000];
@@ -43,16 +68,33 @@ int main()
 //        putchar('\n');
         ok("oldalg's ");
 //        getchar();
+
         start;
-        int len1=newalg::trans(num1);
-        int len2=newalg::trans(num2);
-        memset(result,0,len1+len2);
-        int rlen=newalg::mul(result,num1,len1,num2,len2);
-//        newalg::directPrint(result,rlen);
-        //newalg::backTrans(result,rlen);
-        //printf("%s",result);
+        calg::len1=calg::trans(num1,calg::num1);
+        calg::len2=calg::trans(num2,calg::num2);
+        calg::mul();
+        ok("calg's ");
+
+//        cmp(nc,calg::num1,calg::len1);
+//        cmp(nc2,calg::num2,calg::len2);
+//        cmp(res,calg::result,calg::reslen);
+
+        start;
+        walg::mul(n1,n2);
+        ok("w's ");
+
+//        start;
+//        int len1=newalg::trans(num1);
+//        int len2=newalg::trans(num2);
+//        memset(result,0,len1+len2);
+//        int rlen=newalg::mul(result,num1,len1,num2,len2);
+////        newalg::directPrint(result,rlen);
+//        //newalg::backTrans(result,rlen);
+//        //printf("%s",result);
 //        putchar('\n');
-        ok("newalg's ");
+//        ok("newalg's ");
+
+        putchar('\n');
 //        getchar();
     }
 }
