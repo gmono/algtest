@@ -5,7 +5,7 @@ namespace calg {
 
 typedef unsigned int uint;
 typedef unsigned long long ulong;
-constexpr uint maxnum=100000000;
+constexpr uint maxnum=1000000000;
 uint num1[6300];
 
 uint num2[6300];
@@ -94,12 +94,12 @@ int trans(char *n,uint *nres)
         return 1;
     }
 
-    static uint sbuf[8]={1,10,100,1000,10000,100000,1000000,10000000};
+    static uint sbuf[9]={1,10,100,1000,10000,100000,1000000,10000000,100000000};
     for(int i=len-1;i>=cstart;--i)
     {
 //        if(!isstart&&n[i]=='0') continue;
 //        else isstart=true;
-        if(nowpoint==8)
+        if(nowpoint==9)
         {
             //放入数字
             nres[nowptr++]=nownum;
@@ -125,13 +125,13 @@ void print()
     while(result[end]==0&&end>=0) end--;
     if(end==-1)
     {
-        printf("0");
+        printf("0\n");
         return;
     }
-    printf("%d",result[end]);
+    printf("%u",result[end]);
     for(int i=end-1;i>=0;--i)
     {
-        printf("%08u",result[i]);
+        printf("%09u",result[i]);
     }
     printf("\n");
 }
@@ -139,18 +139,18 @@ void print()
 }
 using namespace calg;
 using namespace std;
-//int main()
-//{
-//    ios::sync_with_stdio(false);
-//    static char buf1[51000];
-//    static char buf2[51000];
-//    while(cin>>buf1>>buf2)
-//    {
-//        len1=trans(buf1,num1);
-//        len2=trans(buf2,num2);
-//        mul();
-//        print();
-//    }
-//}
+int main()
+{
+    ios::sync_with_stdio(false);
+    static char buf1[51000];
+    static char buf2[51000];
+    while(cin>>buf1>>buf2)
+    {
+        len1=trans(buf1,num1);
+        len2=trans(buf2,num2);
+        mul();
+        print();
+    }
+}
 
 

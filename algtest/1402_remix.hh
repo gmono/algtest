@@ -64,8 +64,6 @@ int main(void)
 
     while (cin >> str)
     {
-        istringstream in;
-        stringstream tt;
         int len_a = (str.length() - 1) / WIDTH + 1;
         trans(str.c_str(),str.length(),a);
         cin>>str;
