@@ -6,14 +6,15 @@
 #include <vector>
 #include <climits>
 #include <string.h>
+#include <sstream>
 using namespace std;
-const int base {1000000000};
+
 #define WIDTH 9
 typedef unsigned int uint;
-void trans(const char *n,vector<uint> &nres)
+typedef unsigned long long ulong;
+const uint nbase {1000000000};
+void trans(const char *n,int len,uint *nres)
 {
-    nres.resize(6300);
-    int len=strlen(n);
     int nowpoint=0;
     int nownum=0;
     int nowptr=0;
@@ -26,16 +27,15 @@ void trans(const char *n,vector<uint> &nres)
     if(cstart==len)
     {
         nres[0]=0;
-        nres.resize(1);
         return;
     }
 
-    static uint sbuf[8]={1,10,100,1000,10000,100000,1000000,10000000};
+    static uint sbuf[9]={1,10,100,1000,10000,100000,1000000,10000000,100000000};
     for(int i=len-1;i>=cstart;--i)
     {
 //        if(!isstart&&n[i]=='0') continue;
 //        else isstart=true;
-        if(nowpoint==8)
+        if(nowpoint==9)
         {
             //放入数字
             nres[nowptr++]=nownum;
@@ -58,44 +58,59 @@ int main(void)
 {
     ios::sync_with_stdio(false);
     string str;
-    vector<uint> a, b, c;
+    static uint a[5600];
+    static uint b[5600];
+    static uint c[11200];
 
     while (cin >> str)
     {
+        istringstream in;
+        stringstream tt;
         int len_a = (str.length() - 1) / WIDTH + 1;
-        trans(str.c_str(),a);
+        trans(str.c_str(),str.length(),a);
         cin>>str;
         int len_b = (str.length() - 1) / WIDTH + 1;
-        trans(str.c_str(),b);
+        trans(str.c_str(),str.length(),b);
+        int len=len_a+len_b;
+        //选择
+        uint *base,*num;
+        size_t blen,nlen;
+        if(len_a<len_b)
+        {
+            base=a;
+            num=b;
+            blen=len_a;
+            nlen=len_b;
+        }
+        else
+        {
+            base=b;
+            num=a;
+            blen=len_b;
+            nlen=len_a;
+        }
 
-        c.resize(len_a + len_b);
-        fill(c.begin(), c.end(), 0);
-        unsigned long long temp = 0, carry = 0;
-        for (int i = 0; i != len_a; ++i)
+        memset(c,0,sizeof(uint)*len);
+        ulong carry = 0;
+        for (int i = 0; i != blen; ++i)
         {
             carry = 0;
             int j;
-            for (j = 0; j != len_b; ++j)
+            for (j = 0; j != nlen; ++j)
             {
-                temp = (unsigned long long)a[i] * b[j] + c[i + j] + carry;       //这里要注意，不用long long会溢出
-                carry = temp / base;
-                c[i + j] = temp % base;
+                ulong temp = (ulong)base[i] * num[j] + c[i + j] + carry;       //这里要注意，不用long long会溢出
+                carry = temp / nbase;
+                c[i + j] = temp % nbase;
             }
-            while (carry)
+            if(carry)
             {
-                temp = c[i + j] + carry;
-                carry = temp / base;
-                c[i + j] = temp;
-                ++j;
+                c[i+j]+=carry;
             }
         }
-        while (c.size() > 1 && c[c.size() - 1] == 0)
-            c.pop_back();
-
-        int len = c.size();
+        while(len>1&&!c[len-1]) len--;
         cout << c[--len];
-        while (len > 0)
-            cout << setw(WIDTH) << setfill('0') << (int)c[--len];
+        while (len>0)
+            cout << setw(WIDTH) << setfill('0') << c[--len];
         cout << endl;
     }
 
