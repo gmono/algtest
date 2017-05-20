@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <stdio.h>
 #include <string.h>
 namespace calg {
@@ -93,18 +93,7 @@ int trans(char *n,uint *nres)
         nres[0]=0;
         return 1;
     }
-//    static char tbuf[9]={0};
-//    int now=0;
-//    for(int i=len-1;i>=cstart;i-=8,++now)
-//    {
-//        int p=i-7;
-//        p=p<cstart? cstart:p;
-//        int tlen=i-p+1;
-//        tbuf[tlen]=0;
-//        memcpy(tbuf,n+p,tlen);
-//        sscanf(tbuf,"%u",nres+now);
-//    }
-//    bool isstart=false;
+
     static uint sbuf[8]={1,10,100,1000,10000,100000,1000000,10000000};
     for(int i=len-1;i>=cstart;--i)
     {
@@ -139,34 +128,28 @@ void print()
         printf("0");
         return;
     }
-     char strbuf[]="00000000";
-    for(int i=end;i>=0;--i)
+    printf("%d",result[end]);
+    for(int i=end-1;i>=0;--i)
     {
-        if(i!=end)
-        {
-            for(int j=7;j>=0;--j)
-            {
-                strbuf[j]=result[i]%10+'0';
-                result[i]/=10;
-            }
-            printf("%s",strbuf);
-        }
-        else printf("%u",result[i]);
+        printf("%08u",result[i]);
     }
+    printf("\n");
 }
 
 }
+using namespace calg;
+using namespace std;
 //int main()
 //{
+//    ios::sync_with_stdio(false);
 //    static char buf1[51000];
 //    static char buf2[51000];
-//    while(scanf("%s %s",buf1,buf2)!=EOF)
+//    while(cin>>buf1>>buf2)
 //    {
 //        len1=trans(buf1,num1);
 //        len2=trans(buf2,num2);
 //        mul();
 //        print();
-//        printf("\n");
 //    }
 //}
 

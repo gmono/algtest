@@ -4,7 +4,9 @@ CppApplication {
     files: [
         "1402.hh",
         "1402_c.hh",
+        "1402_mix.hh",
         "1402_new.hh",
+        "1402_remix.hh",
         "1402_test.hh",
         "1402_w.hh",
         "MyTimer_linux.h",
