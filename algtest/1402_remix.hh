@@ -57,6 +57,7 @@ void trans(const char *n,int len,uint *nres)
 int main(void)
 {
     ios::sync_with_stdio(false);
+    setvbuf(stdout,nullptr,_IOFBF,10000000);
     string str;
     static uint a[5600];
     static uint b[5600];
