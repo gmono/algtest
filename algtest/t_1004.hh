@@ -1,5 +1,4 @@
-#ifndef T_1004_HH
-#define T_1004_HH
+
 #include <iostream>
 #include <map>
 #include <string>
@@ -38,5 +37,3 @@ int main()
         cout<<*i<<endl;
     }
 }
-
-#endif
