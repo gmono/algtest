@@ -37,6 +37,22 @@ void makenext()
         }
     }
 }
+void makenext2()
+{
+    int j=0;
+    nextarr[0]=0;
+    for(int i=1;i<M;++i)
+    {
+        while(j&&ms[j]!=ms[i]) j=nextarr[j-1];
+        if(ms[i]==ms[j])
+        {
+            nextarr[i]=j+1;
+            j++;
+        }
+        else nextarr[i]=0;
+    }
+}
+
 int search()
 {
     int s=0,i=0;
@@ -71,13 +87,19 @@ int search2()
         while(j&&ns[i]!=ms[j]) j=nextarr[j-1];
         if(ns[i]==ms[j])
             j++;
-        if(j==M) return i-M+1;
+        //由于此时i还没有递增 其必指向最后一个匹配上的字符
+        //由于i为0开始的下标 需要转换为1开始的下标所以+1
+        //i+1-M得到1开始的下标指向匹配开始位置前一个字符（因为i指向匹配开始位置）
+        //再+1得到匹配开始位置指针
+        if(j==M) return i-M+2;
 
     }
     return -1;
 }
 int main()
 {
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int n;
     cin>>n;
     for(int i=0;i<n;++i)
@@ -85,8 +107,8 @@ int main()
         cin>>N>>M;
         input(ns,N);
         input(ms,M);
-        makenext();
-        int index=search2();
+        makenext2();
+        int index=search();
         cout<<index<<endl;
     }
 }
